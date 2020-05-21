@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "671077743769",
+    "firebase_url": "https://learningproject-7386d.firebaseio.com",
+    "project_id": "learningproject-7386d",
+    "storage_bucket": "learningproject-7386d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671077743769:android:bfd1f303ee58b52b1e0c08",
+        "android_client_info": {
+          "package_name": "ie.app.mycoffeeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671077743769-luvs0125nlhaon2s4uojctm597m5g8ja.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ie.app.mycoffeeapp",
+            "certificate_hash": "8912199a75fa58d7a2a46b258f38ac2268a6491d"
+          }
+        },
+        {
+          "client_id": "671077743769-fus5lfql0ji63ntc8g0rdtidjs2t47n4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOsj73cvyQ_hB-nacKLCboVWrCcGi8Itw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671077743769-fus5lfql0ji63ntc8g0rdtidjs2t47n4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
