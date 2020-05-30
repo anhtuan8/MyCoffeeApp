@@ -1,36 +1,65 @@
 package ie.app.mycoffeeapp.model;
 
-public class Product {
-    private String productId, productName, productImageLink ;
-    private int productPrice, productType; //Type 0: Food, Type 1: Beverage
-    private boolean mustTry;
+import androidx.annotation.NonNull;
 
-    public Product(String productId, String productName, String productImageLink, int productPrice, int productType, boolean mustTry ){
-        this.productId = productId;
-        this.productName = productName;
-        this.productImageLink = productImageLink;
-        this.productPrice = productPrice;
-        this.productType = productType;
-        this.mustTry = mustTry;
+public class Product {
+    private String id, name, image, price, category;
+    private int productType; //Type 0: Food, Type 1: Beverage
+    private boolean isOrdered;
+
+    public Product(){
+
     }
 
-    public int getProductPrice() {
-        return productPrice;
+    public Product(String id, String name, String image, String price, String category, int productType, boolean isOrdered ){
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.productType = productType;
+        this.category = category;
+        this.isOrdered = isOrdered;
+    }
+
+    public String getPrice() {
+        return price;
     }
 
     public int getProductType() {
         return productType;
     }
 
-    public String getProductId() {
-        return productId;
+    public String getId() {
+        return id;
     }
 
-    public String getProductImageLink() {
-        return productImageLink;
+    public String getImage() {
+        return image;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public boolean isOrdered() {
+        return isOrdered;
+    }
+
+    public void setOrdered(boolean ordered) {
+        isOrdered = ordered;
+    }
+
+    public void setProductType(int productType) {
+        this.productType = productType;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "{"+ id + ", " + name +", " + category + "}";
     }
 }

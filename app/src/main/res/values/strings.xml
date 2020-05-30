@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">MyCoffeeApp</string>
-    <string name="title_home">Home</string>
-    <string name="title_camera">Camera</string>
-    <string name="title_personal">Personal</string>
+    <string name="title_home">Tin tức</string>
+    <string name="title_order">Đặt hàng</string>
+    <string name="title_personal">Tài khoản</string>
     <string name="action_search">Search</string>
     <string name="action_settings">Settings</string>
     <string name="title_appbar_search">Search</string>

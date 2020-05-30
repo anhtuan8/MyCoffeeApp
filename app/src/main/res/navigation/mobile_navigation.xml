@@ -11,12 +11,12 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="ie.app.mycoffeeapp.ui.dashboard.DashboardFragment"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_order"
+        android:name="ie.app.mycoffeeapp.ui.order.OrderFragment"
+        tools:layout="@layout/fragment_order" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="ie.app.mycoffeeapp.ui.notifications.NotificationsFragment"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_personal"
+        android:name="ie.app.mycoffeeapp.ui.personal.PersonalFragment"
+        tools:layout="@layout/fragment_personal" />
 </navigation>

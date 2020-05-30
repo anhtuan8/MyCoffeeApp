@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ie.app.mycoffeeapp.ui.order.OrderFragment">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_order"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </include>
+
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tab_layout"-->
+<!--        style="@style/MyTabLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginRight="@dimen/search_size"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:tabIndicatorColor="@color/colorPrimary" />-->
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/search_button"-->
+<!--        android:layout_width="@dimen/search_size"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@android:drawable/screen_background_light_transparent"-->
+<!--        android:contentDescription="menu item search"-->
+<!--        android:src="@drawable/ic_search_black_24dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/pager"-->
+<!--        app:layout_constraintStart_toEndOf="@id/tab_layout"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

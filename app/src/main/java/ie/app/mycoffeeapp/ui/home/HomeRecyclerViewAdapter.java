@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import ie.app.mycoffeeapp.R;
 //import ie.app.mycoffeeapp.ui.article.ArticleActivity;
 import ie.app.mycoffeeapp.model.Article;
+import ie.app.mycoffeeapp.ui.article.ArticleActivity;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeViewHolder> {
     private static final String TAG = "HomeRecyclerViewAdapter";
@@ -62,13 +63,13 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeViewHolder
                 Log.d(TAG, "onClick: Clicked " + articles.get(position).getName());
                 Toast.makeText(context, articles.get(position).getName(), Toast.LENGTH_SHORT).show();
                 //call HomeArticleFragment
-//                Log.d(TAG, "calling HomeArticleActivity");
-//                Activity activityFromContext = (Activity) context;
-//                Intent intent = new Intent(activityFromContext, ArticleActivity.class);
-//                Bundle articleBundle = new Bundle();
-//                articleBundle.putString("articleId", articles.get(position).getArticle_id());
-//                intent.putExtras(articleBundle);
-//                activityFromContext.startActivity(intent);
+                Log.d(TAG, "calling Article Activity");
+                Activity activityFromContext = (Activity) context;
+                Intent intent = new Intent(activityFromContext, ArticleActivity.class);
+                Bundle articleBundle = new Bundle();
+                articleBundle.putString("articleId", articles.get(position).getArticle_id());
+                intent.putExtras(articleBundle);
+                activityFromContext.startActivity(intent);
             }
         });
     }

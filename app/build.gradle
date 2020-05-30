@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -32,9 +33,12 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.2.2'
     implementation 'androidx.navigation:navigation-ui:2.2.2'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    //firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
 
     //recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
     //cardview
     implementation 'androidx.cardview:cardview:1.0.0'
     //glide

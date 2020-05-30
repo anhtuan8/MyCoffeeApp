@@ -1,12 +1,19 @@
 package ie.app.mycoffeeapp.ui.home;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import ie.app.mycoffeeapp.MainActivity;
+import ie.app.mycoffeeapp.MyCoffeeApplication;
 import ie.app.mycoffeeapp.R;
 import ie.app.mycoffeeapp.model.Article;
 
@@ -23,15 +32,27 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.appbar_menu,menu);
+    }
+
     private static final String TAG = "HomeFragment";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         homeViewModel = new HomeViewModel(getContext());
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         Log.d(TAG, "onCreateView: started");
 
         recyclerView = root.findViewById(R.id.home_article_list);
+        Toolbar toolbar = root.findViewById(R.id.appbar);
+        MainActivity activityFromContext = (MainActivity) getContext();
+        assert activityFromContext != null;
+        MyCoffeeApplication.setupToolbar(toolbar,activityFromContext);
+//        activityFromContext.setupToolbar(toolbar);
 
         homeViewModel.getmArticlesTopic1().observe(getViewLifecycleOwner(), new Observer<ArrayList<Article>>() {
             @Override
@@ -39,52 +60,6 @@ public class HomeFragment extends Fragment {
                 initRecyclerView(root);
             }
         });
-
-//        homeViewModel.getmArticlesIsFavorite().observe(getViewLifecycleOwner(), new Observer<ArrayList<Boolean>>() {
-//            @Override
-//            public void onChanged(final ArrayList<Boolean> articleIsFavorites) {
-//                for(int i=0 ; i<articleIsFavorites.size() ; i++){
-//                    final int finalI = i;
-//                    HomeViewHolder viewHolder = (HomeViewHolder)recyclerView.findViewHolderForLayoutPosition(finalI);
-//                    assert viewHolder != null;
-//                    final ImageButton favoriteButton = viewHolder.getFavoriteButton();
-//                    //article at position i is favorite
-//                    if(articleIsFavorites.get(finalI)){
-//                        favoriteButton.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                //Click to remove from favorite
-//                                favoriteButton.setImageResource(R.drawable.ic_star_border_black_48dp);
-//                                homeViewModel.setmArticlesFavorite(false,finalI);
-//                                EasyArtistApplication myApp = (EasyArtistApplication) getActivity().getApplication();
-//                                try {
-//                                    myApp.removeFromFavoriteList(homeViewModel.getmArticles().getValue().get(finalI).getArticle_id());
-//                                } catch (IOException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        });
-//                    }
-//                    //article is not favorite
-//                    else {
-//                        favoriteButton.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                //Click to add to favorite
-//                                favoriteButton.setImageResource(R.drawable.ic_star_black_48dp);
-//                                homeViewModel.setmArticlesFavorite(true,finalI);
-//                                EasyArtistApplication myApp = (EasyArtistApplication) getActivity().getApplication();
-//                                try {
-//                                    myApp.addFavoriteList(homeViewModel.getmArticles().getValue().get(finalI).getArticle_id());
-//                                } catch (IOException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        });
-//                    }
-//                }
-//            }
-//        });
 
         return root;
     }
