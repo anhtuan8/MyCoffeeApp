@@ -1,0 +1,32 @@
+content : div .article_content
+
+Thông báo
+https://www.thecoffeehouse.com/blogs/news/danh-sach-cua-hang-hoat-dong-lai
+https://www.thecoffeehouse.com/blogs/news/the-coffee-house-giam-60-anh-sang-tai-he-thong-huong-ung-gio-trai-dat-2020
+https://www.thecoffeehouse.com/blogs/news/cap-nhat-thong-tin-tai-cua-hang-the-coffee-house-nguyen-van-linh-da-nang
+https://www.thecoffeehouse.com/blogs/news/the-coffee-house-thong-bao-ve-viec-cua-hang-the-coffee-house-da-nang-tiep-don-2-khach-du-lich-duong-tinh-voi-virut-covid-19
+https://www.thecoffeehouse.com/blogs/news/thong-bao-the-coffee-house-va-mot-so-thay-doi-tai-he-thong-trong-mua-dich-covid-19
+https://www.thecoffeehouse.com/blogs/news/gui-chan-thanh-trao-yeu-thuong-cung-the-coffee-house
+https://www.thecoffeehouse.com/blogs/news/go-green
+https://www.thecoffeehouse.com/blogs/news/the-coffee-house-5-nam-hoat-dong-vi-cong-dong
+
+
+Co gi moi
+https://www.thecoffeehouse.com/blogs/news/o-nha-doi-vi-cung-tra-sua-mac-ca-tran-chau-trang
+https://www.thecoffeehouse.com/blogs/news/goi-tiet-kiem-danh-cho-nguoi-yeu-ca-phe-tiet-kiem-den-140k
+https://www.thecoffeehouse.com/blogs/news/chuong-trinh-khach-hang-than-thiet-moi-va-nhung-dieu-co-the-ban-chua-biet
+https://www.thecoffeehouse.com/blogs/news/cung-nha-mang-tet-ve-nha
+https://www.thecoffeehouse.com/blogs/news/ra-mat-tra-trai-cay-tai-the-coffee-house
+https://www.thecoffeehouse.com/blogs/news/bo-ly-su-travel-mug-tu-the-coffee-house-mang-theo-ca-thanh-pho-ban-tung-yeu
+https://www.thecoffeehouse.com/blogs/news/ra-mat-tra-trai-cay-tai-the-coffee-house
+
+Câu chuyện
+https://www.thecoffeehouse.com/blogs/news/hanh-trinh-cam-on-nhung-nguoi-hung-tham-lang
+https://www.thecoffeehouse.com/blogs/news/khep-lai-hanh-trinh-tu-hanh-dong-nho-tiep-suc-cho-dieu-lon-lao
+https://www.thecoffeehouse.com/blogs/news/robusta-arabica-tinh-yeu-ca-phe-viet-nam
+https://www.thecoffeehouse.com/blogs/news/cau-dat-len-mu-suong-xuong-mu-suong
+https://www.thecoffeehouse.com/blogs/news/hanh-trinh-nuoi-duong-tinh-yeu
+https://www.thecoffeehouse.com/blogs/news/nha-ke-mua-trang-bang-nhung-chiec-banh-dau-tien
+https://www.thecoffeehouse.com/blogs/news/ca-phe-nguoi-thanh-thi
+https://www.thecoffeehouse.com/blogs/news/the-coffee-house-x-the-library-project-tat-tan-tat-ve-du-an-xay-dung-thu-vien
+https://www.thecoffeehouse.com/blogs/news/robusta-arabica-tinh-yeu-ca-phe-viet-nam

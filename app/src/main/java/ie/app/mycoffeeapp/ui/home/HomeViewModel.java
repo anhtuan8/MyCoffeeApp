@@ -16,6 +16,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 //import ie.app.mycoffeeapp.EasyArtistApplication;
 
@@ -25,124 +27,67 @@ import ie.app.mycoffeeapp.model.Product;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class HomeViewModel extends ViewModel {
-
-    private MutableLiveData<ArrayList<Article>> mArticlesTopic1, mArticlesTopic2, mArticlesTopic3;
-    private ArrayList<Article> articles1 = new ArrayList<>();
-    private ArrayList<Article> articles2= new ArrayList<>();
-    private ArrayList<Article> articles3 = new ArrayList<>();
+    private MutableLiveData<HashMap<String,ArrayList<Article>>> categorizedArticles;
+    private FirebaseFirestore coffeeAppFirestore;
 
     private FirebaseFirestore easyArtistDb;
-    private Context context;
+//    private Context context;
 
-    public HomeViewModel(Context context) {
-        mArticlesTopic1 = new MutableLiveData<>();
-        mArticlesTopic2 = new MutableLiveData<>();
-        mArticlesTopic3 = new MutableLiveData<>();
-
-        this.context = context;
-        generateArticleList();
+    public HomeViewModel() {
+        categorizedArticles = new MutableLiveData<>();
+//        this.context = context;
 //        getHomeViewArticlesFromDB();
-    }
-
-    private void generateArticleList(){
-        articles1.add(new Article("1",
-                "Detail DetailDetailDetail",
-                "https://product.hstatic.net/1000075078/product/americano_copy_92414ac8e0634fb48ea72b21bc496b43_master.jpg",
-                "Name",
-                "created date",
-                "Coffee"));
-        articles1.add(new Article("2",
-                "Detail DetailDetailDetail",
-                "https://product.hstatic.net/1000075078/product/bac_siu_099c749a7d6044bc9f7f0eac7f57808f_master.jpg",
-                "Name",
-                "created date",
-                "Coffee"));
-        articles1.add(new Article("3",
-                "Detail DetailDetailDetail",
-                "https://product.hstatic.net/1000075078/product/cf_da_copy_a33d6e77f8da405bba9da541744dcea9_large.jpg",
-                "Name",
-                "created date",
-                "Coffee"));
-
-        articles2.add(new Article("1",
-                "Detail DetailDetailDetail",
-                "https://product.hstatic.net/1000075078/product/americano_copy_92414ac8e0634fb48ea72b21bc496b43_master.jpg",
-                "Name",
-                "created date",
-                "Topic 2"));
-        articles2.add(new Article("2",
-                "Detail DetailDetailDetail",
-                "https://product.hstatic.net/1000075078/product/bac_siu_099c749a7d6044bc9f7f0eac7f57808f_master.jpg",
-                "Name",
-                "created date",
-                "Topic 2"));
-        articles2.add(new Article("3",
-                "Detail DetailDetailDetail",
-                "https://product.hstatic.net/1000075078/product/cf_da_copy_a33d6e77f8da405bba9da541744dcea9_large.jpg",
-                "Name",
-                "created date",
-                "Topic 2"));
-
-        articles3.add(new Article("1",
-                "Detail DetailDetailDetail",
-                "https://product.hstatic.net/1000075078/product/americano_copy_92414ac8e0634fb48ea72b21bc496b43_master.jpg",
-                "Name",
-                "created date",
-                "Topic 3"));
-        articles3.add(new Article("2",
-                "Detail DetailDetailDetail",
-                "https://product.hstatic.net/1000075078/product/bac_siu_099c749a7d6044bc9f7f0eac7f57808f_master.jpg",
-                "Name",
-                "created date",
-                "Topic 3"));
-        articles3.add(new Article("3",
-                "Detail DetailDetailDetail",
-                "https://product.hstatic.net/1000075078/product/cf_da_copy_a33d6e77f8da405bba9da541744dcea9_large.jpg",
-                "Name",
-                "created date",
-                "Topic 3"));
-
-        mArticlesTopic1.setValue(articles1);
-        mArticlesTopic2.setValue(articles2);
-        mArticlesTopic3.setValue(articles3);
     }
 
     /**
      * Get all list articles for home view
      * @param
      */
-//    public void getHomeViewArticlesFromDB(){
-//        Log.d(TAG, "getArticlesFromDB: called");
-//        easyArtistDb = FirebaseFirestore.getInstance();
-//        final CollectionReference artistRef = easyArtistDb.collection("articles");
-//        artistRef.orderBy("article_id").limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        Article art = document.toObject(Article.class);
-//                        Activity activity = (Activity) context;
-//                        EasyArtistApplication myApp = (EasyArtistApplication) activity.getApplication();
-//                        if(myApp.getFavoriteList().contains(art.getArticle_id())){
-//                            art.setFavorite(true);
-//                            articlesIsFavorite.add(Boolean.TRUE);
-//                        }
-//                        else{
-//                            art.setFavorite(false);
-//                            articlesIsFavorite.add(Boolean.FALSE);
-//                        }
-//                        articles.add(art);
-//                    }
-//                    mArticles.setValue(articles);
-//                    mArticlesIsFavorite.setValue(articlesIsFavorite);
-//                    Log.d(TAG, "onComplete: mArticles size " + articles.size());
-//                } else {
-//                    Log.d("data", "Error getting documents: ", task.getException());
-//                }
-//            }
-//        });
-//    }
-
+    /**
+     * get all product from menu
+     */
+    private void getArticles(){
+        final HashMap<String,ArrayList<Article>> articles = new HashMap<>();
+        Log.d(TAG, "getArticlesFromDB: called");
+        final CollectionReference coffeeAppRef = coffeeAppFirestore.collection("articles");
+        coffeeAppRef.orderBy("id").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Product product = document.toObject(Product.class);
+                        product.setOrdered(false);
+                        if(product.getCategory().equalsIgnoreCase("BÁNH & SNACK")){
+                            product.setProductType(0);
+                            if(!food.containsKey(product.getCategory())){
+                                food.put(product.getCategory(),new ArrayList<Product>());
+                            }
+                            Objects.requireNonNull(food.get(product.getCategory())).add(product);
+                        }
+                        else {
+                            product.setProductType(1);
+                            if(!beverage.containsKey(product.getCategory())){
+                                beverage.put(product.getCategory(),new ArrayList<Product>());
+                            }
+                            Objects.requireNonNull(beverage.get(product.getCategory())).add(product);
+                        }
+                    }
+                    switch (type){
+                        case 0:
+                            categorizedMenu.setValue(food);
+                            Log.d(TAG, "onComplete: food size " + food.get("BÁNH & SNACK").size());
+                            break;
+                        case 1:
+                            categorizedMenu.setValue(beverage);
+                            Log.d(TAG, "onComplete: beverage size " + beverage.size());
+                            break;
+                    }
+                }else {
+                    Log.d("data", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
     public MutableLiveData<ArrayList<Article>> getmArticlesTopic1() {
         return mArticlesTopic1;
     }
