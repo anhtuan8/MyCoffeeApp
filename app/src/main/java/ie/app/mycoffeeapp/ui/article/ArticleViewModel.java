@@ -37,12 +37,11 @@ import ie.app.mycoffeeapp.model.Article;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class ArticleViewModel extends ViewModel {
+    private static final String TAG = "ArticleViewModel";
+
     private final String articleId;
     private FirebaseFirestore coffeeAppFirestore;
     private FirebaseStorage coffeeAppStorage;
-//    private MutableLiveData<String> articleContent;
-//    private MutableLiveData<String> articleTitle;
-//    private MutableLiveData<String> articleImage;
     private MutableLiveData<Article> article;
     Context context;
 
@@ -52,15 +51,15 @@ public class ArticleViewModel extends ViewModel {
         article = new MutableLiveData<>();
         this.articleId = articleId;
         this.context = context;
-//        getArticle();
+        getArticleFromDB(articleId);
     }
 
-    public void getArticleFromDB(){
+    public void getArticleFromDB(String id){
         // Create a storage reference from our app
         final StorageReference storageRef = coffeeAppStorage.getReference();
 
-        final CollectionReference artistRef = coffeeAppFirestore.collection("articles");
-        Query query = artistRef.whereEqualTo("article_id", this.articleId);
+        final CollectionReference articleRef = coffeeAppFirestore.collection("articles");
+        Query query = articleRef.whereEqualTo("article_id", id);
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -68,22 +67,22 @@ public class ArticleViewModel extends ViewModel {
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                         final Article art = document.toObject(Article.class);
                         // Create a reference with an initial file path and name
-                        final StorageReference pathReference = storageRef.child("articles/" + art.getArticle_id() + ".txt");
-                        pathReference.getBytes(Utils.ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                            @Override
-                            public void onSuccess(byte[] bytes) {
-                                // Data for "articles/articles_id.txt" is returns, use this as needed
-                                String contentHtml = new String(bytes);
-                                art.setDetail(contentHtml);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle any errors
-                                art.setDetail("Nội dung không khả dụng. Hãy thử lại sau.");
-                                exception.printStackTrace();
-                            }
-                        });
+//                        final StorageReference pathReference = storageRef.child("articles/" + art.getArticle_id() + ".txt");
+//                        pathReference.getBytes(Utils.ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+//                            @Override
+//                            public void onSuccess(byte[] bytes) {
+//                                // Data for "articles/articles_id.txt" is returns, use this as needed
+//                                String contentHtml = new String(bytes);
+//                                art.setDetail(contentHtml);
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception exception) {
+//                                // Handle any errors
+//                                art.setDetail("Nội dung không khả dụng. Hãy thử lại sau.");
+//                                exception.printStackTrace();
+//                            }
+//                        });
                         article.setValue(art);
                         Log.d(TAG, "onComplete: article title " + art.getName());
                     }

@@ -35,6 +35,7 @@ public class ArticleActivity extends AppCompatActivity {
     private TextView articleTitle;
     private HtmlTextView articleContent;
     private ImageView articleImage;
+    private String articleId;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,12 +47,14 @@ public class ArticleActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getExtras();
-        Log.d(TAG, "savedInstanceState " + bundle.getString("articleId") );
-        if(bundle.getString("articleId") != null) {
-            articleViewModel = new ArticleViewModel(bundle.getString("articleId"), this);
-        }
-        else {
-            articleViewModel = new ArticleViewModel("0", this);
+        if(bundle!=null) {
+            articleId = bundle.getString("articleId");
+            Log.d(TAG, "savedInstanceState " + articleId);
+            if (articleId != null) {
+                articleViewModel = new ArticleViewModel(articleId, this);
+            } else {
+                articleViewModel = new ArticleViewModel("-1", this);
+            }
         }
         setContentView(R.layout.activity_article);
 
