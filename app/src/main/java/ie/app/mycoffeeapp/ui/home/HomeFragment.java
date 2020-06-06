@@ -33,10 +33,10 @@ import ie.app.mycoffeeapp.model.Article;
 import ie.app.mycoffeeapp.ui.order.menu.MenuRecyclerViewAdapter;
 
 public class HomeFragment extends Fragment {
+    private static final String TAG = "HomeFragment";
 
     private HomeViewModel homeViewModel;
-
-    private RecyclerView recyclerView;
+    private HashMap<String, ArrayList<Article>> categorizedArticle;
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -44,29 +44,29 @@ public class HomeFragment extends Fragment {
         inflater.inflate(R.menu.appbar_menu,menu);
     }
 
-    private static final String TAG = "HomeFragment";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        homeViewModel = new HomeViewModel(getContext());
+        homeViewModel = new HomeViewModel();
+        categorizedArticle = new HashMap<>();
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        Log.d(TAG, "onCreateView: started");
+//        Log.d(TAG, "onCreateView: started");
 
-        recyclerView = root.findViewById(R.id.home_article_list);
         Toolbar toolbar = root.findViewById(R.id.appbar);
         MainActivity activityFromContext = (MainActivity) getContext();
         assert activityFromContext != null;
         MyCoffeeApplication.setupToolbar(toolbar,activityFromContext);
 //        activityFromContext.setupToolbar(toolbar);
 
-        homeViewModel.getmArticlesTopic1().observe(getViewLifecycleOwner(), new Observer<ArrayList<Article>>() {
+        homeViewModel.getCategorizedArticles().observe(getViewLifecycleOwner(), new Observer<HashMap<String, ArrayList<Article>>>() {
             @Override
-            public void onChanged(ArrayList<Article> articles) {
-                initRecyclerView(root);
+            public void onChanged(HashMap<String, ArrayList<Article>> stringArrayListHashMap) {
+                categorizedArticle = stringArrayListHashMap;
+                initRecyclerView(root,categorizedArticle);
             }
         });
-
+//        initRecyclerView(root,categorizedArticle);
         return root;
     }
 
@@ -77,18 +77,27 @@ public class HomeFragment extends Fragment {
      */
     private void initRecyclerView(View view, HashMap<String, ArrayList<Article>> categorizedArticle){
         Log.d(TAG, "initRecycleView: started");
-//        Log.v(TAG, getActivity().getPackageName());
-//        HomeRecyclerViewAdapter adapter = new HomeRecyclerViewAdapter(getContext(),this, homeViewModel.getmArticlesTopic1().getValue());
-//        recyclerView.setAdapter(adapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+////        Log.v(TAG, getActivity().getPackageName());
+//        for(String category: categorizedArticle.keySet()){
+//            Log.d(TAG, "initRecyclerView: " + category);
+//            HomeRecyclerViewAdapter adapter =
+//                    new HomeRecyclerViewAdapter(getContext(),
+//                            this,
+//                            categorizedArticle.get(category));
+//            recyclerView.setAdapter(adapter);
+//            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+//        }
+
+
         LinearLayout parent = view.findViewById(R.id.menuContainer);
 
         for(String category: categorizedArticle.keySet()){
+            Log.d(TAG, "initRecyclerView: " + category);
             TextView categoryName = new TextView(requireContext());
             categoryName.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             categoryName.setText(category);
-            categoryName.setTextAppearance(R.style.Description);
-            categoryName.setPadding(16,12,16,12);
+            categoryName.setTextAppearance(R.style.MenuTopic);
+            categoryName.setPadding(24,24,16,12);
             parent.addView(categoryName);
 
             RecyclerView recyclerView = new RecyclerView(requireContext());
@@ -100,6 +109,7 @@ public class HomeFragment extends Fragment {
 //            recyclerView.setLayoutParams(lp);
 
             recyclerView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            recyclerView.setPadding(0,24,0,24);
 
             HomeRecyclerViewAdapter adapter = new HomeRecyclerViewAdapter(getContext(), this, categorizedArticle.get(category));
             recyclerView.setAdapter(adapter);

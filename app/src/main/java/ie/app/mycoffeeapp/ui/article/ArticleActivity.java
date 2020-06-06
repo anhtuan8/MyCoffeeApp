@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import ie.app.mycoffeeapp.MyCoffeeApplication;
 import ie.app.mycoffeeapp.R;
+import ie.app.mycoffeeapp.model.Article;
 
 @SuppressLint("Registered")
 public class ArticleActivity extends AppCompatActivity {
@@ -68,26 +69,15 @@ public class ArticleActivity extends AppCompatActivity {
 //            actionBar.setHideOnContentScrollEnabled(true);
         }
 
-        articleViewModel.getArticleContent().observe(this, new Observer<String>() {
+        articleViewModel.getArticle().observe(this, new Observer<Article>() {
             @Override
-            public void onChanged(String s) {
-                articleContent.setHtml(s,new HtmlHttpImageGetter(articleContent));
+            public void onChanged(Article article) {
+                articleTitle.setText(article.getName());
+                Glide.with(getApplicationContext()).asBitmap().load(article.getImage_link()).into(articleImage);
+                articleContent.setHtml(article.getDetail(),new HtmlHttpImageGetter(articleContent));
             }
         });
 
-        articleViewModel.getArticleTitle().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                articleTitle.setText(s);
-            }
-        });
-
-        articleViewModel.getArticleImage().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Glide.with(getApplicationContext()).asBitmap().load(s).into(articleImage);
-            }
-        });
     }
 
 }

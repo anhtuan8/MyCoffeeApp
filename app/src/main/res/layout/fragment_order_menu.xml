@@ -12,16 +12,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginBottom="?attr/actionBarSize"
-        android:paddingBottom="?attr/actionBarSize">
+        android:layout_marginBottom="?attr/actionBarSize">
 
         <LinearLayout
             android:id="@+id/menuContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="?attr/actionBarSize"
-            android:paddingBottom="?attr/actionBarSize"/>
+            android:layout_marginBottom="?attr/actionBarSize" />
     </ScrollView>
 <!--        <androidx.recyclerview.widget.RecyclerView-->
 <!--            android:id="@+id/order_menu"-->

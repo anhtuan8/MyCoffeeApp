@@ -16,59 +16,75 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 import ie.app.mycoffeeapp.MyCoffeeApplication;
+import ie.app.mycoffeeapp.firebaseutils.Utils;
 import ie.app.mycoffeeapp.model.Article;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class ArticleViewModel extends ViewModel {
     private final String articleId;
-    private FirebaseFirestore easyArtistDb;
-    private MutableLiveData<String> articleContent;
-    private MutableLiveData<String> articleTitle;
-    private MutableLiveData<String> articleImage;
+    private FirebaseFirestore coffeeAppFirestore;
+    private FirebaseStorage coffeeAppStorage;
+//    private MutableLiveData<String> articleContent;
+//    private MutableLiveData<String> articleTitle;
+//    private MutableLiveData<String> articleImage;
+    private MutableLiveData<Article> article;
     Context context;
 
     public ArticleViewModel(String articleId, Context context){
-        articleContent = new MutableLiveData<>();
-        articleContent.setValue("<h1>Article content</h1><p>Article content Article content Article content</p><img src=\"https://i.pinimg.com/originals/33/fc/95/33fc959336bbeec077b0f4daceffc891.jpg\"/>");
-        articleTitle = new MutableLiveData<>();
-        articleTitle.setValue("My Coffee App presentation");
-        articleImage = new MutableLiveData<>();
-        articleImage.setValue("https://product.hstatic.net/1000075078/product/americano_copy_92414ac8e0634fb48ea72b21bc496b43_master.jpg");
-//        easyArtistDb = FirebaseFirestore.getInstance();
-
+        coffeeAppStorage = FirebaseStorage.getInstance();
+        coffeeAppFirestore = FirebaseFirestore.getInstance();
+        article = new MutableLiveData<>();
         this.articleId = articleId;
         this.context = context;
 //        getArticle();
     }
 
-    public void getArticle(){
-        final CollectionReference artistRef = easyArtistDb
-                .collection("articles");
+    public void getArticleFromDB(){
+        // Create a storage reference from our app
+        final StorageReference storageRef = coffeeAppStorage.getReference();
+
+        final CollectionReference artistRef = coffeeAppFirestore.collection("articles");
         Query query = artistRef.whereEqualTo("article_id", this.articleId);
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                        Article art = document.toObject(Article.class);
-                        Activity activity = (Activity) context;
-                        MyCoffeeApplication application = (MyCoffeeApplication) activity.getApplication();
-
-                        articleContent.setValue(art.getDetail());
-                        articleTitle.setValue(art.getName());
-                        articleImage.setValue(art.getImage_link());
+                        final Article art = document.toObject(Article.class);
+                        // Create a reference with an initial file path and name
+                        final StorageReference pathReference = storageRef.child("articles/" + art.getArticle_id() + ".txt");
+                        pathReference.getBytes(Utils.ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess(byte[] bytes) {
+                                // Data for "articles/articles_id.txt" is returns, use this as needed
+                                String contentHtml = new String(bytes);
+                                art.setDetail(contentHtml);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                                art.setDetail("Nội dung không khả dụng. Hãy thử lại sau.");
+                                exception.printStackTrace();
+                            }
+                        });
+                        article.setValue(art);
                         Log.d(TAG, "onComplete: article title " + art.getName());
                     }
 
@@ -79,17 +95,8 @@ public class ArticleViewModel extends ViewModel {
         });
     }
 
-    public LiveData<String> getArticleContent() {
-        return articleContent;
-    }
-
-
-    public LiveData<String> getArticleTitle() {
-        return articleTitle;
-    }
-
-    public MutableLiveData<String> getArticleImage() {
-        return articleImage;
+    public MutableLiveData<Article> getArticle() {
+        return article;
     }
 
     public String getArticleId() {

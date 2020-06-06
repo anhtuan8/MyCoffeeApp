@@ -11,14 +11,16 @@ public class Article {
     private String name;
     private String createdDate;
     private String topic;
+    private String description;
 
-    public Article(String article_id,  String detail, String image_link, String name, String createdDate, String topic){
+    public Article(String article_id,  String detail, String image_link, String name, String createdDate, String topic, String description){
         this.article_id = article_id;
         this.detail = detail;
         this.image_link = image_link;
         this.name = name;
         this.createdDate = createdDate;
         this.topic = topic;
+        this.description = description;
     }
 
     @Override
@@ -73,6 +75,14 @@ public class Article {
 
     public void setTopic(String topic) {
         this.topic = topic;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Article(){

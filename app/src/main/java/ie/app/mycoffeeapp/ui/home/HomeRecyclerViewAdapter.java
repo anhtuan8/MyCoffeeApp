@@ -53,7 +53,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeViewHolder
         Glide.with(context).asBitmap().load(articles.get(position).getImage_link()).into(holder.getImage());
         //bind topic title and description
         holder.getTitle().setText(articles.get(position).getName());
-        holder.getDescription().setText(articles.get(position).getDetail());
+        holder.getDescription().setText(articles.get(position).getDescription());
         holder.getItem().setOnClickListener(new View.OnClickListener() {
             @Override
             /**

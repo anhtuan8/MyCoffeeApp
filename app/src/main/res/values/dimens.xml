@@ -15,5 +15,6 @@
     <dimen name="menu_item_imageHeight">450dp</dimen>
     <dimen name="search_size">24dp</dimen>
     <dimen name="menu_item_height">350dp</dimen>
+    <dimen name="article_item_imageHeight">100dp</dimen>
 
 </resources>

@@ -79,8 +79,8 @@ public class MenuFragment extends Fragment {
             TextView categoryName = new TextView(requireContext());
             categoryName.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             categoryName.setText(category);
-            categoryName.setTextAppearance(R.style.Description);
-            categoryName.setPadding(16,12,16,12);
+            categoryName.setTextAppearance(R.style.MenuTopic);
+            categoryName.setPadding(24,24,16,12);
             parent.addView(categoryName);
 
             RecyclerView recyclerView = new RecyclerView(requireContext());
