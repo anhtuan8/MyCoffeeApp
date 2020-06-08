@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
@@ -39,7 +42,8 @@ public class ArticleActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.appbar_menu,menu);
+        super.onCreateOptionsMenu(menu);
+//        getMenuInflater().inflate(R.menu.appbar_menu,menu);
         return true;
     }
 
@@ -62,12 +66,13 @@ public class ArticleActivity extends AppCompatActivity {
         articleContent = findViewById(R.id.articleContent);
         articleImage = findViewById(R.id.articleImage);
 
-        Toolbar toolbar = findViewById(R.id.appbar);
+        final Toolbar toolbar = findViewById(R.id.appbar);
+        final TextView title = toolbar.findViewById(R.id.article_title);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setHomeButtonEnabled(true);
 //            actionBar.setHideOnContentScrollEnabled(true);
         }
@@ -78,9 +83,9 @@ public class ArticleActivity extends AppCompatActivity {
                 articleTitle.setText(article.getName());
                 Glide.with(getApplicationContext()).asBitmap().load(article.getImage_link()).into(articleImage);
                 articleContent.setHtml(article.getDetail(),new HtmlHttpImageGetter(articleContent));
+                title.setText(article.getName());
             }
         });
-
     }
 
 }

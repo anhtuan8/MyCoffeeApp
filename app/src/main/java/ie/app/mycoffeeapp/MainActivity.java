@@ -34,16 +34,16 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView,navController);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.appbarbutton_search:
-                //search event
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item){
+//        switch (item.getItemId()){
+//            case R.id.appbarbutton_search:
+//                //search event
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
 }
