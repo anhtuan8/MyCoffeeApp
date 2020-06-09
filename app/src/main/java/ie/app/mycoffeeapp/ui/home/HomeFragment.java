@@ -167,7 +167,7 @@ public class HomeFragment extends Fragment {
             profileName.setText(user.getDisplayName());
 
             profilePicture.setVisibility(View.VISIBLE);
-            Glide.with(this).asBitmap().load(user.getPhotoUrl()).into(profilePicture);
+            Glide.with(this).asBitmap().load(user.getPhotoUrl()).fitCenter().into(profilePicture);
             logOutButton.setVisibility(View.VISIBLE);
             logOutButton.setOnClickListener(new View.OnClickListener() {
                 @Override

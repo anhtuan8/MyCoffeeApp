@@ -16,5 +16,10 @@
     <dimen name="search_size">24dp</dimen>
     <dimen name="menu_item_height">350dp</dimen>
     <dimen name="article_item_imageHeight">100dp</dimen>
+    <dimen name="personal_profile_height">100dp</dimen>
+    <dimen name="personal_horizontal_padding">32dp</dimen>
+    <dimen name="personal_item_height">50dp</dimen>
+    <dimen name="personal_vertical_margin">24dp</dimen>
+    <dimen name="profile_picture_height">120dp</dimen>
 
 </resources>
