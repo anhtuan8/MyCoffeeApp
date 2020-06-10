@@ -32,7 +32,7 @@ import ie.app.mycoffeeapp.model.Product;
 public class MyCoffeeApplication extends Application {
     private static final String TAG = "MyCoffeeApplication";
     private Order order;
-    private FirebaseUser user;
+    private static FirebaseUser user;
 
     @Override
     public void onCreate() {
@@ -51,7 +51,7 @@ public class MyCoffeeApplication extends Application {
         Log.v("Toolbar", String.valueOf(toolbar.getMenu().size()));
     }
 
-    public FirebaseUser updateUser(){
+    public static FirebaseUser updateUser(){
         user = FirebaseAuth.getInstance().getCurrentUser();
         return user;
     }
