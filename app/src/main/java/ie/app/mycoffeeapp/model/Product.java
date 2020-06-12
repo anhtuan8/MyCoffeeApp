@@ -1,6 +1,9 @@
 package ie.app.mycoffeeapp.model;
 
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class Product {
     private String id, name, image, price, category;
@@ -23,6 +26,16 @@ public class Product {
 
     public String getPrice() {
         return price;
+    }
+
+    public int getPriceInt(){
+        StringBuilder digits = new StringBuilder();
+        for(int i=0 ; i<price.length() ; i++){
+            if( '0' <= price.charAt(i) && price.charAt(i) <= '9' ){
+                digits.append(price.charAt(i));
+            }
+        }
+        return Integer.parseInt(digits.toString());
     }
 
     public int getProductType() {
@@ -55,6 +68,16 @@ public class Product {
 
     public void setProductType(int productType) {
         this.productType = productType;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(obj instanceof Product){
+            return ((Product) obj).getId().equals(this.id);
+        }
+        else {
+            return false;
+        }
     }
 
     @NonNull

@@ -21,5 +21,6 @@
     <dimen name="personal_item_height">50dp</dimen>
     <dimen name="personal_vertical_margin">24dp</dimen>
     <dimen name="profile_picture_height">120dp</dimen>
+    <dimen name="menu_bottom_margin">200dp</dimen>
 
 </resources>

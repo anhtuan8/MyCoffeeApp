@@ -101,7 +101,7 @@ public class MenuFragment extends Fragment {
 
             RecyclerView recyclerView = new RecyclerView(requireContext());
 
-            final MenuRecyclerViewAdapter adapter = new MenuRecyclerViewAdapter(getContext(),categorizedMenu.get(category),recyclerView);
+            final MenuRecyclerViewAdapter adapter = new MenuRecyclerViewAdapter(getContext(),categorizedMenu.get(category),recyclerView,view);
             adapters.add(adapter);
             recyclerView.setAdapter(adapter);
 
@@ -116,5 +116,6 @@ public class MenuFragment extends Fragment {
             parent.addView(recyclerView);
         }
     }
+
 
 }

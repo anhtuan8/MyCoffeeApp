@@ -1,17 +1,22 @@
 package ie.app.mycoffeeapp.ui.order.menu;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -23,6 +28,7 @@ import java.util.List;
 import ie.app.mycoffeeapp.MyCoffeeApplication;
 import ie.app.mycoffeeapp.R;
 import ie.app.mycoffeeapp.model.Product;
+import ie.app.mycoffeeapp.ui.cart.CartActivity;
 import ie.app.mycoffeeapp.ui.profile.ProfileActivity;
 
 public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuViewHolder> implements Filterable {
@@ -30,14 +36,16 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuViewHolder
 
     private ArrayList<Product> menuItems = new ArrayList<>();
     private ArrayList<Product> menuItemsFull = new ArrayList<>();
-    Context context;
-    RecyclerView recyclerView;
+    private Context context;
+    private RecyclerView recyclerView;
+    private View root;
 
-    public MenuRecyclerViewAdapter(Context context, ArrayList<Product> menuItems, RecyclerView recyclerView){
+    public MenuRecyclerViewAdapter(Context context, ArrayList<Product> menuItems, RecyclerView recyclerView, View root){
         this.context = context;
         this.menuItems = menuItems;
         menuItemsFull = new ArrayList<>(menuItems);
         this.recyclerView = recyclerView;
+        this.root = root;
     }
 
     @NonNull
@@ -142,6 +150,32 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuViewHolder
     };
 
     private void addToOrder(Product product){
+        MyCoffeeApplication.addProduct(product);
+        addSeeCartButton();
         Toast.makeText(context,"Đã thêm " + product.getName() +" vào giỏ hàng", Toast.LENGTH_SHORT).show();
+    }
+
+    private void addSeeCartButton(){
+        ConstraintLayout cartButton = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.cart_view_button,null,false);
+        cartButton.findViewById(R.id.button_view_cart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Start CartActivity
+                Intent intent = new Intent(context, CartActivity.class);
+                context.startActivity(intent);
+            }
+        });
+        TextView amount = cartButton.findViewById(R.id.amount);
+        amount.setText(String.format("%d", MyCoffeeApplication.getOrder().getAmount()));
+        TextView price = cartButton.findViewById(R.id.price);
+        price.setText(MyCoffeeApplication.getOrder().getPriceString());
+
+        ConstraintLayout container = root.findViewById(R.id.container);
+        ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        container.addView(cartButton,lp);
+
+        ConstraintLayout.LayoutParams menuLp = (ConstraintLayout.LayoutParams) container.findViewById(R.id.menu).getLayoutParams();
+//        notifyAll();
     }
 }

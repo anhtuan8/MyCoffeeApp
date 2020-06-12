@@ -31,7 +31,7 @@ import ie.app.mycoffeeapp.model.Product;
 @SuppressLint("Registered")
 public class MyCoffeeApplication extends Application {
     private static final String TAG = "MyCoffeeApplication";
-    private Order order;
+    private static Order order;
     private static FirebaseUser user;
 
     @Override
@@ -56,7 +56,16 @@ public class MyCoffeeApplication extends Application {
         return user;
     }
 
-//    public void updateToolbar(View toolbar){
+    public static boolean addProduct(Product product){
+        order.addProduct(product);
+        return true;
+    }
+
+    public static Order getOrder() {
+        return order;
+    }
+
+    //    public void updateToolbar(View toolbar){
 //        AppCompatButton signInButton = toolbar.findViewById(R.id.button_sign_in);
 //        AppCompatButton logOutButton = toolbar.findViewById(R.id.button_log_out);
 //        signInButton.setVisibility(View.GONE);

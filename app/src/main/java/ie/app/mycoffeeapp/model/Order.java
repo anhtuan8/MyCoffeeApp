@@ -5,42 +5,62 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class Order {
-    private HashMap<String, Integer> order;
-    private String price;
+    private HashMap<Product, Integer> order;
+    private int price, amount;
 
     public Order(){
         order = new HashMap<>();
+        price = 0;
+        amount = 0;
     }
-    public void addProduct(String productId){
-        if(order.containsKey(productId)) {
-            order.put(productId, order.get(productId) + 1);
-        }
-        else{
-            order.put(productId,1);
-        }
-    }
-
-    public void removeProduct(String productId){
-        if(order.containsKey(productId)) {
-            if(Objects.requireNonNull(order.get(productId)).compareTo(1) > 0){
-                order.put(productId,order.get(productId) -1);
+    public boolean addProduct(Product product){
+        try {
+            if(order.containsKey(product)) {
+                order.put(product, order.get(product) + 1);
             }
-            else if(order.get(productId).compareTo(1) == 0){
-                order.remove(productId);
+            else{
+                order.put(product,1);
             }
+            price += product.getPriceInt();
+            amount++;
+            return true;
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return false;
         }
     }
 
-    public void setPrice(int price){
-        this.price = price + "đ";
+    public boolean removeProduct(Product product){
+        try{
+            if(order.containsKey(product)) {
+                if(Objects.requireNonNull(order.get(product)).compareTo(1) > 0){
+                    order.put(product,order.get(product) -1);
+                }
+                else if(Objects.requireNonNull(order.get(product)).compareTo(1) == 0){
+                    order.remove(product);
+                }
+                price-=product.getPriceInt();
+                amount--;
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
 
-    public void setPrice(String price){
-        this.price = price + "đ";
+    public String getPriceString(){
+        return price + " đ";
     }
 
-    public String getPrice(){
-        return price;
-    }
+    public int getPriceInt(){return price;}
 
+    public int getAmount() {
+        return amount;
+    }
 }
