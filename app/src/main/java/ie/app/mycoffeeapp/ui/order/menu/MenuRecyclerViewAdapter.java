@@ -172,10 +172,11 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuViewHolder
 
         ConstraintLayout container = root.findViewById(R.id.container);
         ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
+        lp.bottomToTop = R.id.separator;
+        lp.leftToLeft = ConstraintLayout.LayoutParams.PARENT_ID;
+        lp.bottomMargin = root.findViewById(R.id.separator).getHeight();
         container.addView(cartButton,lp);
 
-        ConstraintLayout.LayoutParams menuLp = (ConstraintLayout.LayoutParams) container.findViewById(R.id.menu).getLayoutParams();
 //        notifyAll();
     }
 }

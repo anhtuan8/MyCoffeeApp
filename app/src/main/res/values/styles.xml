@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:ns2="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -43,6 +43,14 @@
     <style name="MenuTopic" parent="TextAppearance.AppCompat">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#222222</item>
+    </style>
+
+    <style name="TextInput" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextInputHint" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="myStyle">

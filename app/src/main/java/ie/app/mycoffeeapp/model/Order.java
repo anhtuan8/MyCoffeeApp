@@ -63,4 +63,8 @@ public class Order {
     public int getAmount() {
         return amount;
     }
+
+    public HashMap<Product, Integer> getOrder() {
+        return order;
+    }
 }

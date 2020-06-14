@@ -27,4 +27,16 @@
     <string name="sign_in">Sign in</string>
     <string name="log_out">Log out</string>
     <string name="search_hint">Nhập tên sản phẩm</string>
+    <string name="bill_info">Thông tin đơn hàng</string>
+    <string name="name_input">Vui lòng nhập tên</string>
+    <string name="name_input_icon">name_input_icon</string>
+    <string name="name_input_label">Tên</string>
+    <string name="phone_input_icon">phone input</string>
+    <string name="phone_input_label">Số điện thoại</string>
+    <string name="phone_input">Vui lòng nhập số điện thoại của bạn</string>
+    <string name="address_input_icon">"Address input icon "</string>
+    <string name="address_input_label">Địa chỉ nhận hàng</string>
+    <string name="address_input">Vui lòng nhập địa chỉ nơi bạn muốn nhận hàng</string>
+    <string name="cart_info">Chi tiết giỏ hàng</string>
+    <string name="note_input_label">Thêm ghi chú</string>
 </resources>
