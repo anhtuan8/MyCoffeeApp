@@ -38,6 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
                 <com.google.android.material.textfield.TextInputLayout
+                    app:errorEnabled="true"
+                    app:errorTextColor="@color/design_default_color_error"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_margin="@dimen/bill_input_padding"
@@ -57,6 +59,8 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    app:errorEnabled="true"
+                    app:errorTextColor="@color/design_default_color_error"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/name_input"
                     app:layout_constraintRight_toRightOf="parent"
@@ -78,6 +82,8 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    app:errorEnabled="true"
+                    app:errorTextColor="@color/design_default_color_error"
                     app:layout_constraintTop_toBottomOf="@+id/phone_input"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:id="@+id/address_input"
@@ -100,6 +106,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/address_input"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:errorEnabled="true"
+                    app:errorTextColor="@color/design_default_color_error"
                     android:id="@+id/note_input"
                     android:layout_margin="@dimen/bill_input_padding"
                     app:startIconDrawable="@drawable/ic_event_note_black_16dp"

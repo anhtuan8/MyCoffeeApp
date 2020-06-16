@@ -6,18 +6,14 @@
 
 package ie.app.mycoffeeapp.ui.article;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,14 +23,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
-import ie.app.mycoffeeapp.MyCoffeeApplication;
-import ie.app.mycoffeeapp.firebaseutils.Utils;
 import ie.app.mycoffeeapp.model.Article;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class ArticleViewModel extends ViewModel {
     private static final String TAG = "ArticleViewModel";

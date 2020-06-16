@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+def supportVer = '27.1.0'
 
 android {
     compileSdkVersion 29
@@ -67,6 +68,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     //circle imageview
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'com.google.guava:guava:22.0'
+    implementation "com.android.support:appcompat-v7:$supportVer"
+    implementation "com.android.support:design:$supportVer"
+    implementation 'com.google.code.gson:gson:2.8.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

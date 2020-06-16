@@ -1,4 +1,4 @@
-package ie.app.mycoffeeapp.firebaseutils;
+package ie.app.mycoffeeapp.utils;
 
 public class Utils {
     public static final long ONE_MEGABYTE = 1024*1024;

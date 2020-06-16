@@ -2,6 +2,7 @@ package ie.app.mycoffeeapp;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
