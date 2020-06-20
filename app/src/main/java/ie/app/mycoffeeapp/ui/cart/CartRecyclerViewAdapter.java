@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import ie.app.mycoffeeapp.MyCoffeeApplication;
 import ie.app.mycoffeeapp.R;
 import ie.app.mycoffeeapp.model.Order;
 import ie.app.mycoffeeapp.model.Product;
@@ -44,11 +45,28 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        Product product = products.get(position);
+    public void onBindViewHolder(@NonNull CartViewHolder holder, final int position) {
+        final Product product = products.get(position);
         holder.getPrice().setText(product.getPrice());
         holder.getAmount().setText(amounts.get(position).toString());
         holder.getItemName().setText(product.getName());
+        holder.getRemoveButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyCoffeeApplication.removeProduct(product);
+                int productAmount = amounts.get(position);
+                if(productAmount == 1){
+                    amounts.remove(position);
+                    products.remove(position);
+                }
+                else if(productAmount > 1) {
+                    amounts.set(position,productAmount-1);
+                }
+                notifyDataSetChanged();
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position,products.size());
+            }
+        });
     }
 
     @Override

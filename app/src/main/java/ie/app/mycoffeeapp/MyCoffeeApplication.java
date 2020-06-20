@@ -62,6 +62,11 @@ public class MyCoffeeApplication extends Application {
         return true;
     }
 
+    public static boolean removeProduct(Product product){
+        order.removeProduct(product);
+        return true;
+    }
+
     public static Order getOrder() {
         return order;
     }

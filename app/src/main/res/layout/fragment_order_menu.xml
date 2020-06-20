@@ -31,12 +31,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:id="@+id/separator"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
 <!--        <androidx.recyclerview.widget.RecyclerView-->
 <!--            android:id="@+id/order_menu"-->
 <!--            android:layout_width="match_parent"-->

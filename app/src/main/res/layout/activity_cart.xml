@@ -25,7 +25,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/bill_input_container"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/personal_vertical_margin"
             app:layout_constraintTop_toBottomOf="@+id/bill_info_text"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -113,12 +113,12 @@
                     app:startIconDrawable="@drawable/ic_event_note_black_16dp"
                     app:startIconContentDescription="@string/address_input_icon"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:hint="@string/note_input_label"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/note_input_edittext"
-                        android:lines="2"
+                        android:lines="3"
                         android:textAppearance="@style/TextInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -180,6 +180,7 @@
                         android:id="@+id/shipping_fee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
                         android:text="0 đ"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -205,6 +206,7 @@
                         android:id="@+id/total_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
                         android:text="xx.xxx đ"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

@@ -15,9 +15,11 @@ import ie.app.mycoffeeapp.ui.order.menu.MenuFragment;
 public class OrderAdapter extends FragmentStateAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
+    private Fragment orderFragment;
 
     public OrderAdapter(@NonNull Fragment fragment) {
         super(fragment);
+        this.orderFragment = fragment;
     }
 
     @NonNull
@@ -25,14 +27,14 @@ public class OrderAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0: {
-                Fragment fragment = new MenuFragment();
+                Fragment fragment = new MenuFragment(orderFragment);
                 Bundle args = new Bundle();
                 args.putInt(MenuFragment.MENU_TYPE,1);
                 fragment.setArguments(args);
                 return fragment;
             }
             case 1: {
-                Fragment fragment = new MenuFragment();
+                Fragment fragment = new MenuFragment(orderFragment);
                 Bundle args = new Bundle();
                 args.putInt(MenuFragment.MENU_TYPE,0);
                 fragment.setArguments(args);

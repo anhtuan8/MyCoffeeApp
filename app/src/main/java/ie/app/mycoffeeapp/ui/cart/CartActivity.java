@@ -7,7 +7,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +35,7 @@ public class CartActivity extends AppCompatActivity {
     private MaterialButton confirmButton;
     private TextInputLayout nameInput, addressInput, phoneInput, noteInput;
     private TextInputEditText nameInputEdit, addressInputEdit, phoneInputEdit, noteInputEdit;
+    private AppCompatTextView shippingFee, totalPrice, totalPriceInConfirmButton;
     private RecyclerView cartItemList;
     private FirebaseFirestore mFirestore;
     private Order order;
@@ -40,8 +44,20 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        Toolbar toolbar = findViewById(R.id.toolbar_cart);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp);
+        }
+        shippingFee = findViewById(R.id.shipping_fee);
+        totalPrice = findViewById(R.id.total_amount);
+
         confirmButton = findViewById(R.id.button_confirm);
         confirmButton.setOnClickListener(sendBill);
+        totalPriceInConfirmButton = findViewById(R.id.price);
+
         nameInput = findViewById(R.id.name_input);
         addressInput = findViewById(R.id.address_input);
         phoneInput = findViewById(R.id.phone_input);
@@ -55,6 +71,20 @@ public class CartActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
         order = MyCoffeeApplication.getOrder();
         initRecyclerView();
+        fillInformation();
+    }
+
+    private void fillInformation(){
+        //fill text view: name, phone number, total price, shipping fee, total price in confirm button
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            nameInputEdit.setText(user.getDisplayName());
+            phoneInputEdit.setText(user.getPhoneNumber());
+        }
+        totalPrice.setText(order.getPriceString());
+        totalPriceInConfirmButton.setText(order.getPriceString());
+        shippingFee.setText("Miễn phí");
     }
 
     private void initRecyclerView(){
@@ -145,4 +175,9 @@ public class CartActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
+    }
 }

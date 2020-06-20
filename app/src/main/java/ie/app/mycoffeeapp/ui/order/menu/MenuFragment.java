@@ -1,7 +1,5 @@
 package ie.app.mycoffeeapp.ui.order.menu;
 
-import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,34 +8,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.SearchView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
-
-import ie.app.mycoffeeapp.MainActivity;
-import ie.app.mycoffeeapp.MyCoffeeApplication;
 import ie.app.mycoffeeapp.R;
 import ie.app.mycoffeeapp.model.Product;
-import ie.app.mycoffeeapp.ui.order.OrderViewModel;
 
 public class MenuFragment extends Fragment {
     private static final String TAG = "MenuFragment";
+
+    private Fragment parentFragment;
 
     public static final String MENU_TYPE = "type";
     private HashMap<String, ArrayList<Product>> categorizedItems = new HashMap<>();
@@ -45,6 +35,10 @@ public class MenuFragment extends Fragment {
     private MenuItem searchItem;
     private SearchView searchView;
     private ArrayList<MenuRecyclerViewAdapter> adapters = new ArrayList<>();
+
+    public MenuFragment(Fragment fragment){
+        parentFragment = fragment;
+    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -90,6 +84,7 @@ public class MenuFragment extends Fragment {
 
     public void initRecyclerView(View view, HashMap<String,ArrayList<Product>> categorizedMenu){
         LinearLayout parent = view.findViewById(R.id.menuContainer);
+        View container = parentFragment.getView();
 
         for(String category: categorizedMenu.keySet()){
             TextView categoryName = new TextView(requireContext());
@@ -101,7 +96,7 @@ public class MenuFragment extends Fragment {
 
             RecyclerView recyclerView = new RecyclerView(requireContext());
 
-            final MenuRecyclerViewAdapter adapter = new MenuRecyclerViewAdapter(getContext(),categorizedMenu.get(category),recyclerView,view);
+            final MenuRecyclerViewAdapter adapter = new MenuRecyclerViewAdapter(getContext(),categorizedMenu.get(category),recyclerView,container);
             adapters.add(adapter);
             recyclerView.setAdapter(adapter);
 
