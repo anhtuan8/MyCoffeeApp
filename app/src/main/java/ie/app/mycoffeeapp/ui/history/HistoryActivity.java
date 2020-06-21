@@ -41,7 +41,19 @@ public class HistoryActivity extends AppCompatActivity {
         historyViewModel.getBills().observe(this, new Observer<ArrayList<Bill>>() {
             @Override
             public void onChanged(ArrayList<Bill> bills) {
-                initRecyclerView(bills);
+                if(bills.size()>0) {
+                    initRecyclerView(bills);
+                }
+                else{
+                    setContentView(R.layout.activity_history_empty);
+                    Toolbar toolbar = findViewById(R.id.toolbar);
+                    setSupportActionBar(toolbar);
+                    ActionBar actionBar = getSupportActionBar();
+                    if(actionBar != null){
+                        actionBar.setDisplayHomeAsUpEnabled(true);
+                        actionBar.setHomeAsUpIndicator(R.drawable.ic_close_black_24dp);
+                    }
+                }
             }
         });
 //        initRecyclerView();

@@ -19,4 +19,9 @@
         android:id="@+id/navigation_personal"
         android:name="ie.app.mycoffeeapp.ui.personal.PersonalFragment"
         tools:layout="@layout/fragment_personal" />
+
+    <fragment
+        android:id="@+id/navication_store"
+        android:name="ie.app.mycoffeeapp.ui.maps.MapsFragment"
+        tools:layout="@layout/fragment_maps"/>
 </navigation>

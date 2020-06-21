@@ -32,6 +32,7 @@ public class HistoryViewModel extends ViewModel {
         bills = new MutableLiveData<>();
         firestore = FirebaseFirestore.getInstance();
         getBillsByClientId(MyCoffeeApplication.updateUser().getUid());
+//        getBillsByClientId("123131");
     }
 
     private void getBillsByClientId(String id){

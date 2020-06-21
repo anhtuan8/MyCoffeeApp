@@ -64,6 +64,7 @@ public class PersonalFragment extends Fragment {
             profileContainer.setOnClickListener(noUser);
             profileButton.setOnClickListener(noUser);
             signOutButton.setOnClickListener(noUser);
+            historyButton.setOnClickListener(noUser);
         }
         return root;
     }
