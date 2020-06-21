@@ -39,4 +39,7 @@
     <string name="address_input">Vui lòng nhập địa chỉ nơi bạn muốn nhận hàng</string>
     <string name="cart_info">Chi tiết giỏ hàng</string>
     <string name="note_input_label">Thêm ghi chú</string>
+    <string name="status_cancel">Đã hủy</string>
+    <string name="status_processing">Đang xử lý</string>
+    <string name="status_complete">Đã hoàn thành</string>
 </resources>

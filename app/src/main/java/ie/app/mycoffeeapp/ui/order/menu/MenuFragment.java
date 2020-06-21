@@ -23,11 +23,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import ie.app.mycoffeeapp.R;
 import ie.app.mycoffeeapp.model.Product;
+import ie.app.mycoffeeapp.ui.order.OrderFragment;
 
 public class MenuFragment extends Fragment {
     private static final String TAG = "MenuFragment";
 
-    private Fragment parentFragment;
+    private OrderFragment parentFragment;
 
     public static final String MENU_TYPE = "type";
     private HashMap<String, ArrayList<Product>> categorizedItems = new HashMap<>();
@@ -36,7 +37,7 @@ public class MenuFragment extends Fragment {
     private SearchView searchView;
     private ArrayList<MenuRecyclerViewAdapter> adapters = new ArrayList<>();
 
-    public MenuFragment(Fragment fragment){
+    public MenuFragment(OrderFragment fragment){
         parentFragment = fragment;
     }
 
@@ -84,7 +85,6 @@ public class MenuFragment extends Fragment {
 
     public void initRecyclerView(View view, HashMap<String,ArrayList<Product>> categorizedMenu){
         LinearLayout parent = view.findViewById(R.id.menuContainer);
-        View container = parentFragment.getView();
 
         for(String category: categorizedMenu.keySet()){
             TextView categoryName = new TextView(requireContext());
@@ -96,7 +96,7 @@ public class MenuFragment extends Fragment {
 
             RecyclerView recyclerView = new RecyclerView(requireContext());
 
-            final MenuRecyclerViewAdapter adapter = new MenuRecyclerViewAdapter(getContext(),categorizedMenu.get(category),recyclerView,container);
+            final MenuRecyclerViewAdapter adapter = new MenuRecyclerViewAdapter(getContext(),categorizedMenu.get(category),recyclerView,parentFragment);
             adapters.add(adapter);
             recyclerView.setAdapter(adapter);
 

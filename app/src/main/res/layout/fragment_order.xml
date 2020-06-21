@@ -21,6 +21,16 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <include
+        android:id="@+id/cart_view_button"
+        layout="@layout/cart_view_button"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/separator"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"

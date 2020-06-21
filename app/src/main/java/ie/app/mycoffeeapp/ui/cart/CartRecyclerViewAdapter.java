@@ -54,6 +54,11 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartViewHolder
             @Override
             public void onClick(View v) {
                 MyCoffeeApplication.removeProduct(product);
+                if(MyCoffeeApplication.haveOrderViewModel()){
+                    MyCoffeeApplication.updateOrderViewModelData();
+                }
+                CartActivity cartActivity = (CartActivity) context;
+                cartActivity.changeOrder(MyCoffeeApplication.getOrder());
                 int productAmount = amounts.get(position);
                 if(productAmount == 1){
                     amounts.remove(position);

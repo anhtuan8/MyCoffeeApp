@@ -11,6 +11,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,12 +40,17 @@ public class CartActivity extends AppCompatActivity {
     private AppCompatTextView shippingFee, totalPrice, totalPriceInConfirmButton;
     private RecyclerView cartItemList;
     private FirebaseFirestore mFirestore;
+
     private Order order;
+    private CartViewModel cartViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        cartViewModel = new CartViewModel();
+        order = cartViewModel.getOrder().getValue();
+
         Toolbar toolbar = findViewById(R.id.toolbar_cart);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -69,12 +76,17 @@ public class CartActivity extends AppCompatActivity {
         cartItemList = findViewById(R.id.cart_item_list);
         cartItemList.setNestedScrollingEnabled(false);
         mFirestore = FirebaseFirestore.getInstance();
-        order = MyCoffeeApplication.getOrder();
         initRecyclerView();
-        fillInformation();
+        cartViewModel.getOrder().observe(this, new Observer<Order>() {
+            @Override
+            public void onChanged(Order newOrder) {
+                order = newOrder;
+                fillInformation(order);
+            }
+        });
     }
 
-    private void fillInformation(){
+    private void fillInformation(Order order){
         //fill text view: name, phone number, total price, shipping fee, total price in confirm button
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -180,4 +192,9 @@ public class CartActivity extends AppCompatActivity {
         finish();
         return super.onSupportNavigateUp();
     }
+
+    public void changeOrder(Order order){
+        cartViewModel.setOrder(order);
+    }
+
 }

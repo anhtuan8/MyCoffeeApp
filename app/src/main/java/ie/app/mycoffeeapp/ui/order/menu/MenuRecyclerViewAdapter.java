@@ -29,6 +29,7 @@ import ie.app.mycoffeeapp.MyCoffeeApplication;
 import ie.app.mycoffeeapp.R;
 import ie.app.mycoffeeapp.model.Product;
 import ie.app.mycoffeeapp.ui.cart.CartActivity;
+import ie.app.mycoffeeapp.ui.order.OrderFragment;
 import ie.app.mycoffeeapp.ui.profile.ProfileActivity;
 
 public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuViewHolder> implements Filterable {
@@ -38,14 +39,16 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuViewHolder
     private ArrayList<Product> menuItemsFull = new ArrayList<>();
     private Context context;
     private RecyclerView recyclerView;
-    private View root;
+    private View root; //orderFragment
+    private OrderFragment orderFragment;
 
-    public MenuRecyclerViewAdapter(Context context, ArrayList<Product> menuItems, RecyclerView recyclerView, View root){
+    public MenuRecyclerViewAdapter(Context context, ArrayList<Product> menuItems, RecyclerView recyclerView, OrderFragment orderFragment){
         this.context = context;
         this.menuItems = menuItems;
         menuItemsFull = new ArrayList<>(menuItems);
         this.recyclerView = recyclerView;
-        this.root = root;
+        this.root = orderFragment.getView();
+        this.orderFragment = orderFragment;
     }
 
     @NonNull
@@ -151,31 +154,26 @@ public class MenuRecyclerViewAdapter extends RecyclerView.Adapter<MenuViewHolder
 
     private void addToOrder(Product product){
         MyCoffeeApplication.addProduct(product);
+        orderFragment.changeOrder(MyCoffeeApplication.getOrder());
         addSeeCartButton();
         Toast.makeText(context,"Đã thêm " + product.getName() +" vào giỏ hàng", Toast.LENGTH_SHORT).show();
     }
 
     private void addSeeCartButton(){
-        ConstraintLayout cartButton = (ConstraintLayout) LayoutInflater.from(context).inflate(R.layout.cart_view_button,null,false);
-        cartButton.findViewById(R.id.button_view_cart).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Start CartActivity
-                Intent intent = new Intent(context, CartActivity.class);
-                context.startActivity(intent);
-            }
-        });
-        TextView amount = cartButton.findViewById(R.id.amount);
-        amount.setText(String.format("%d", MyCoffeeApplication.getOrder().getAmount()));
-        TextView price = cartButton.findViewById(R.id.price);
-        price.setText(MyCoffeeApplication.getOrder().getPriceString());
-
-        ConstraintLayout container = root.findViewById(R.id.container);
-        ConstraintLayout.LayoutParams lp = new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp.bottomToBottom = R.id.separator;
-        lp.leftToLeft = ConstraintLayout.LayoutParams.PARENT_ID;
-        lp.bottomMargin = root.findViewById(R.id.separator).getHeight();
-        container.addView(cartButton,lp);
+//        ConstraintLayout cartButton = root.findViewById(R.id.cart_view_button);
+//        cartButton.setVisibility(View.VISIBLE);
+//        cartButton.findViewById(R.id.button_view_cart).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Start CartActivity
+//                Intent intent = new Intent(context, CartActivity.class);
+//                context.startActivity(intent);
+//            }
+//        });
+//        TextView amount = cartButton.findViewById(R.id.amount);
+//        amount.setText(String.format("%d", MyCoffeeApplication.getOrder().getAmount()));
+//        TextView price = cartButton.findViewById(R.id.price);
+//        price.setText(MyCoffeeApplication.getOrder().getPriceString());
 
 //        notifyAll();
     }

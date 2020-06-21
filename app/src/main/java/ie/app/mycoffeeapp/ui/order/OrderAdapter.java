@@ -9,15 +9,16 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import ie.app.mycoffeeapp.model.Order;
 import ie.app.mycoffeeapp.ui.order.menu.DemoMenuFragment;
 import ie.app.mycoffeeapp.ui.order.menu.MenuFragment;
 
 public class OrderAdapter extends FragmentStateAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
-    private Fragment orderFragment;
+    private OrderFragment orderFragment;
 
-    public OrderAdapter(@NonNull Fragment fragment) {
+    public OrderAdapter(@NonNull OrderFragment fragment) {
         super(fragment);
         this.orderFragment = fragment;
     }

@@ -19,9 +19,7 @@ import com.bumptech.glide.Glide;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//import ie.app.mycoffeeapp.EasyArtistApplication;
 import ie.app.mycoffeeapp.R;
-//import ie.app.mycoffeeapp.ui.article.ArticleActivity;
 import ie.app.mycoffeeapp.model.Article;
 import ie.app.mycoffeeapp.ui.article.ArticleActivity;
 

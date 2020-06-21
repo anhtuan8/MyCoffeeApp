@@ -28,16 +28,19 @@ import java.util.HashMap;
 
 import ie.app.mycoffeeapp.model.Order;
 import ie.app.mycoffeeapp.model.Product;
+import ie.app.mycoffeeapp.ui.order.OrderViewModel;
 
 @SuppressLint("Registered")
 public class MyCoffeeApplication extends Application {
     private static final String TAG = "MyCoffeeApplication";
     private static Order order;
     private static FirebaseUser user;
+    private static OrderViewModel orderViewModel;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        orderViewModel = new OrderViewModel();
         order = new Order();
         user = FirebaseAuth.getInstance().getCurrentUser();
     }
@@ -69,6 +72,18 @@ public class MyCoffeeApplication extends Application {
 
     public static Order getOrder() {
         return order;
+    }
+
+    public static void updateOrderViewModelData(){
+        orderViewModel.setOrder(order);
+    }
+
+    public static void setOrderViewModel(OrderViewModel orderViewModel) {
+        MyCoffeeApplication.orderViewModel = orderViewModel;
+    }
+
+    public static boolean haveOrderViewModel(){
+        return orderViewModel!=null;
     }
 
     //    public void updateToolbar(View toolbar){

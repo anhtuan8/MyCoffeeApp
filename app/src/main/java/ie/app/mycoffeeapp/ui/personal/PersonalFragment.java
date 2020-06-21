@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 import de.hdodenhof.circleimageview.CircleImageView;
 import ie.app.mycoffeeapp.MainActivity;
 import ie.app.mycoffeeapp.R;
+import ie.app.mycoffeeapp.ui.history.HistoryActivity;
 import ie.app.mycoffeeapp.ui.profile.ProfileActivity;
 
 public class PersonalFragment extends Fragment {
@@ -55,6 +56,7 @@ public class PersonalFragment extends Fragment {
             profileContainer.setOnClickListener(viewPersonalInfo);
             profileButton.setOnClickListener(viewPersonalInfo);
             signOutButton.setOnClickListener(signOut);
+            historyButton.setOnClickListener(transactionHistory);
         }
         else{
             Glide.with(getContext()).asBitmap().load(R.drawable.ic_error_black_24dp).fitCenter().into(profileImage);
@@ -98,6 +100,14 @@ public class PersonalFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Toast.makeText(getContext(),"Bạn chưa đăng nhập",Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private View.OnClickListener transactionHistory = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getContext(), HistoryActivity.class);
+            getActivity().startActivity(intent);
         }
     };
 

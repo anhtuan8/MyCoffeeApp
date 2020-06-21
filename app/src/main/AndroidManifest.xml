@@ -54,6 +54,7 @@
         <activity
             android:name=".ui.profile.ProfileActivity"/>
         <activity android:name=".ui.cart.CartActivity"/>
+        <activity android:name=".ui.history.HistoryActivity"/>
     </application>
 
 </manifest>
